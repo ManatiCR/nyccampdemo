@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 DRUSH="./vendor/bin/drush"
-SITE_ALIAS="@nyccampdemo.nyccampdemo.dev"
+SITE_ALIAS="@tecci.tecci.dev"
 $DRUSH $SITE_ALIAS cc drush
 echo "Installing..."
 $DRUSH $SITE_ALIAS si --account-pass=admin -y

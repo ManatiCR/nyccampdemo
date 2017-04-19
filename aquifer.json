@@ -1,5 +1,5 @@
 {
-  "name": "nyccampdemo",
+  "name": "tecci",
   "paths": {
     "make": "drupal.make.yml",
     "lock": false,
@@ -19,7 +19,7 @@
       "features": "modules/features"
     },
     "profiles": {
-      "nyccampdemo": "profiles/nyccampdemo"
+      "tecci": "profiles/tecci"
     },
     "files": {
       "root": "files"

@@ -1,13 +1,13 @@
-[![CircleCI](https://circleci.com/gh/kporras07/nyccampdemo.svg?style=svg)](https://circleci.com/gh/kporras07/nyccampdemo)
+[![CircleCI](https://circleci.com/gh/kporras07/tecci.svg?style=svg)](https://circleci.com/gh/kporras07/tecci)
 
 [![wercker status](https://app.wercker.com/status/efab95e41ae5ae4bedf061418019fc6f/m/develop "wercker status")](https://app.wercker.com/project/bykey/efab95e41ae5ae4bedf061418019fc6f)
 
-[![Build Status](https://travis-ci.org/kporras07/nyccampdemo.svg?branch=develop)](https://travis-ci.org/kporras07/nyccampdemo)
+[![Build Status](https://travis-ci.org/kporras07/tecci.svg?branch=develop)](https://travis-ci.org/kporras07/tecci)
 
 [![Build Status](http://104.131.51.193:8080/buildStatus/icon?job=Build/develop)](http://104.131.51.193:8080/job/Build/job/develop/)
-# nyccampdemo
+# tecci
 
-nyccampdemo Drupal Distribution
+tecci Drupal Distribution
 
 ## Dependencies
 
@@ -61,11 +61,11 @@ Configure Solr search (adapted from
 
 Prepare the site:
 
-* `./scripts/nyccampdemo_local_install.sh`
+* `./scripts/tecci_local_install.sh`
 
 ## Structure
 
-**nyccampdemo Distribution**
+**tecci Distribution**
 
 * `.gitignore`
 * `/artifacts/` - Deployable build artifacts.

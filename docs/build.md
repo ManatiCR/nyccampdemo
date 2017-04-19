@@ -1,6 +1,6 @@
 # Build
 
-The nyccampdemo distribution code repository does not contain third-party code; instead, it contains only custom code and a mechanism for creating a "build" - a complete version of the software including all third-party components (Drupal, modules, libraries), along with patches and so forth.
+The tecci distribution code repository does not contain third-party code; instead, it contains only custom code and a mechanism for creating a "build" - a complete version of the software including all third-party components (Drupal, modules, libraries), along with patches and so forth.
 
 The build itself uses the open-source project [Aquifer](https://github.com/aquifer/aquifer).
 

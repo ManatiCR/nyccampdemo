@@ -1,17 +1,17 @@
 Listen 8080
 
 <VirtualHost *:8080>
-  DocumentRoot /home/ubuntu/nyccampdemo/build
-  ServerName nyccampdemo.dev
+  DocumentRoot /home/ubuntu/tecci/build
+  ServerName tecci.dev
 
-  <Directory /home/ubuntu/nyccampdemo/build>
+  <Directory /home/ubuntu/tecci/build>
     Options FollowSymLinks
     AllowOverride All
     RewriteEngine On
     RewriteBase /
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteRule /home/ubuntu/nyccampdemo/build/(.*)$ index.php/?q=$1 [L,QSA]
+    RewriteRule /home/ubuntu/tecci/build/(.*)$ index.php/?q=$1 [L,QSA]
     Order allow,deny
     Allow from all
   </Directory>

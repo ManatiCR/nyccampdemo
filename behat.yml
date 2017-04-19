@@ -15,7 +15,7 @@ default:
       files_path: "%paths.base%/tests/sample_content"
       goutte: ~
       selenium2: ~
-      base_url: http://nyccampdemo.dev
+      base_url: http://tecci.dev
       javascript_session: 'selenium2'
     Drupal\DrupalExtension:
       blackbox: ~
@@ -38,18 +38,18 @@ default:
 circle:
   extensions:
     Behat\MinkExtension:
-      base_url: http://nyccampdemo.dev:8080
+      base_url: http://tecci.dev:8080
       selenium2: ~
       browser_name: chrome
     Drupal\DrupalExtension:
       drupal:
-        drupal_root: "/home/ubuntu/nyccampdemo/build"
+        drupal_root: "/home/ubuntu/tecci/build"
       drush:
-        root: "/home/ubuntu/nyccampdemo/build"
+        root: "/home/ubuntu/tecci/build"
 wercker:
   extensions:
     Behat\MinkExtension:
-      base_url: http://nyccampdemo.dev:8082
+      base_url: http://tecci.dev:8082
       selenium2: ~
       browser_name: chrome
     Drupal\DrupalExtension:
@@ -58,9 +58,9 @@ wercker:
 travis:
   extensions:
     Behat\MinkExtension:
-      base_url: http://nyccampdemo.dev:8080
+      base_url: http://tecci.dev:8080
       selenium2: ~
       browser_name: chrome
     Drupal\DrupalExtension:
       drupal:
-        drupal_root: "/home/travis/build/kporras07/nyccampdemo/build"
+        drupal_root: "/home/travis/build/kporras07/tecci/build"

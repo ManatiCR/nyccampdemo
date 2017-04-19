@@ -2,7 +2,7 @@ machine:
   php:
     version: 5.6.14
   hosts:
-    nyccampdemo.dev: 127.0.0.1
+    tecci.dev: 127.0.0.1
 
 dependencies:
   cache_directories:
@@ -20,15 +20,15 @@ dependencies:
     # Configure Drush.
     - sudo mkdir -p ~/.drush
     - sudo chown -R ubuntu:ubuntu ~/.drush
-    - cp ./circle/nyccampdemo.aliases.drushrc.php ~/.drush
+    - cp ./circle/tecci.aliases.drushrc.php ~/.drush
     - drush cc drush
     # Drupal settings.
     - cp ./circle/settings.secret.php ./settings
     # Set alias.
-    - drush site-set @nyccampdemo.nyccampdemo.dev
+    - drush site-set @tecci.tecci.dev
     # Configure Apache.
-    - cp ./circle/nyccampdemo /etc/apache2/sites-available
-    - sudo a2ensite nyccampdemo
+    - cp ./circle/tecci /etc/apache2/sites-available
+    - sudo a2ensite tecci
     - sudo a2enmod rewrite
     - sudo service apache2 restart
   post:
@@ -58,10 +58,10 @@ test:
     # - mkdir -p $HOME/reports
     # - sudo chmod 777 /home/ubuntu/reports
     # Use the arguments '-f pretty -o /dev/stdout -f junit -o /home/ubuntu/reports' when Behat releases the JUnit formatter.
-    - sudo BUILD="$HOME/build" su -c "PATH=$PATH:/home/ubuntu/.composer/vendor/bin/ && drush site-set www-data@localhost$BUILD#nyccampdemo.dev && /home/ubuntu/.phpenv/shims/php ./vendor/bin/behat -p circle" www-data
+    - sudo BUILD="$HOME/build" su -c "PATH=$PATH:/home/ubuntu/.composer/vendor/bin/ && drush site-set www-data@localhost$BUILD#tecci.dev && /home/ubuntu/.phpenv/shims/php ./vendor/bin/behat -p circle" www-data
     # - sudo ls -la $HOME/reports
     # - sudo mv $HOME/reports/*.xml $CIRCLE_TEST_REPORTS/junit/
     # Overridden features.
-    - drush @nyccampdemo.nyccampdemo.dev fl | grep -qi 'overridden' && (echo 'Overridden Features - FAIL' && exit 1) || (echo 'Overridden Features - PASS' && exit 0)
+    - drush @tecci.tecci.dev fl | grep -qi 'overridden' && (echo 'Overridden Features - FAIL' && exit 1) || (echo 'Overridden Features - PASS' && exit 0)
     # Available updates.
-    - drush @nyccampdemo.nyccampdemo.dev ups | grep -qi "update available" && (echo 'Updates available - FAIL' && exit 1) || (echo 'No updates available - PASS' && exit 0)
+    - drush @tecci.tecci.dev ups | grep -qi "update available" && (echo 'Updates available - FAIL' && exit 1) || (echo 'No updates available - PASS' && exit 0)

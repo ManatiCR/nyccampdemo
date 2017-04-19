@@ -1,13 +1,13 @@
 <?php
 /**
  * @file
- * Install, update and uninstall functions for nyccampdemo profile.
+ * Install, update and uninstall functions for tecci profile.
  */
 
 /**
  * Implements hook_install().
  */
-function nyccampdemo_install() {
+function tecci_install() {
   // Create a default role for site administrators,
   // with all available permissions assigned.
   $admin_role = new stdClass();

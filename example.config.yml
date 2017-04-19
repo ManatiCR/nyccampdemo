@@ -7,8 +7,8 @@ vagrant_synced_folder_default_type: nfs
 
 # If you need to run multiple instances of Drupal VM, set a unique hostname,
 # machine name, and IP address for each instance.
-vagrant_hostname: nyccampdemo.dev
-vagrant_machine_name: nyccampdemo
+vagrant_hostname: tecci.dev
+vagrant_machine_name: tecci
 vagrant_ip: 0.0.0.0
 
 # Allow Drupal VM to be accessed via a public network interface on your host.
@@ -22,8 +22,8 @@ vagrant_public_ip: ""
 vagrant_synced_folders:
   # The first synced folder will be used for the default Drupal installation, if
   # build_makefile: is 'true'.
-  - local_path: ~/development/nyccampdemo
-    destination: /var/www/nyccampdemo
+  - local_path: ~/development/tecci
+    destination: /var/www/tecci
     type: nfs
     create: true
     mount_options: ['vers=3']
@@ -47,7 +47,7 @@ install_site: false
 # Settings for building a Drupal site from a makefile (if 'build_makefile:'
 # is 'true').
 drupal_major_version: 7
-drupal_core_path: "/var/www/nyccampdemo/build"
+drupal_core_path: "/var/www/tecci/build"
 drupal_domain: "{{ vagrant_hostname }}"
 drupal_site_name: "Drupal"
 drupal_install_profile: standard

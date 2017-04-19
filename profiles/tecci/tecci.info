@@ -1,4 +1,4 @@
-name = nyccampdemo
+name = tecci
 description = Install with minimal configuration.
 version = 0.3
 core = 7.x
