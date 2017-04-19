@@ -30,6 +30,8 @@ dependencies:
     - sudo cp ./circle/tecci.dev.conf /etc/apache2/sites-available/
     - sudo a2ensite tecci.dev
     - sudo a2enmod rewrite
+    # Disable default php5 module.
+    - sudo a2dismod php5
     - sudo service apache2 restart
   post:
     # Build the Drupal site and set files permissions.
