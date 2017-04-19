@@ -1,6 +1,6 @@
 machine:
   php:
-    version: 5.6.17
+    version: 5.6.22
   hosts:
     tecci.dev: 127.0.0.1
 
@@ -30,6 +30,8 @@ dependencies:
     - sudo cp ./circle/tecci.dev.conf /etc/apache2/sites-available/
     - sudo a2ensite tecci.dev
     - sudo a2enmod rewrite
+    # Disable default php5 module.
+    - sudo a2dismod php5
     - sudo service apache2 restart
   post:
     # Build the Drupal site and set files permissions.
@@ -58,7 +60,7 @@ test:
     # - mkdir -p $HOME/reports
     # - sudo chmod 777 /home/ubuntu/reports
     # Use the arguments '-f pretty -o /dev/stdout -f junit -o /home/ubuntu/reports' when Behat releases the JUnit formatter.
-    - sudo BUILD="$HOME/build" su -c "PATH=$PATH:/home/ubuntu/.composer/vendor/bin/ && drush site-set www-data@localhost$BUILD#tecci.dev && /home/ubuntu/.phpenv/shims/php ./vendor/bin/behat -p circle" www-data
+    - ./vendor/bin/behat -p circle
     # - sudo ls -la $HOME/reports
     # - sudo mv $HOME/reports/*.xml $CIRCLE_TEST_REPORTS/junit/
     # Overridden features.
