@@ -24,7 +24,7 @@ steps:
   - name: Build site
     command: 'cd $SRC_DIR && ./node_modules/.bin/aquifer build'
   - name: Download DB
-    command: '$HOME/terminus site backups get --site=tecci --env=dev --element=database --to=$ASSET_DIR/test-export.sql.gz --latest'
+    command: '$HOME/terminus sites list && $HOME/terminus site backups get --site=tecci --env=dev --element=database --to=$ASSET_DIR/test-export.sql.gz --latest'
   - name: Setup Drupal
     plugin: Drupal
     subDirectory: build
