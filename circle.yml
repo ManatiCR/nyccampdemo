@@ -27,7 +27,7 @@ dependencies:
     # Set alias.
     - drush site-set @tecci.tecci.dev
     # Configure Apache.
-    - cp ./circle/tecci /etc/apache2/sites-available
+    - sudo cp ./circle/tecci /etc/apache2/sites-available
     - sudo a2ensite tecci
     - sudo a2enmod rewrite
     - sudo service apache2 restart
