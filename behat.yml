@@ -63,4 +63,4 @@ travis:
       browser_name: chrome
     Drupal\DrupalExtension:
       drupal:
-        drupal_root: "/home/travis/build/kporras07/tecci/build"
+        drupal_root: "/home/travis/build/ManatiCR/tecci/build"
