@@ -43,6 +43,7 @@ install:
   - drush site-set @tecci.tecci.dev
   - drush cc drush
   # Debug
+  - echo $TRAVIS_BUILD_DIR
   - drush status
   - ls /home/travis/build/manaticr/tecci/build
   # Install Drupal and disable sendmail.
