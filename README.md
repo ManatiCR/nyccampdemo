@@ -1,10 +1,9 @@
-[![CircleCI](https://circleci.com/gh/manaticr/tecci.svg?style=svg)](https://circleci.com/gh/manaticr/tecci)
+[![CircleCI](https://circleci.com/gh/ManatiCR/tecci.svg?style=svg)](https://circleci.com/gh/ManatiCR/tecci)
 
-[![wercker status](https://app.wercker.com/status/efab95e41ae5ae4bedf061418019fc6f/m/develop "wercker status")](https://app.wercker.com/project/bykey/efab95e41ae5ae4bedf061418019fc6f)
+[![wercker status](https://app.wercker.com/status/6c04bcd0836e6dcd45ae85b016781347/s/master "wercker status")](https://app.wercker.com/project/byKey/6c04bcd0836e6dcd45ae85b016781347)
 
-[![Build Status](https://travis-ci.org/manaticr/tecci.svg?branch=develop)](https://travis-ci.org/manaticr/tecci)
+[![Build Status](https://travis-ci.org/ManatiCR/tecci.svg?branch=master)](https://travis-ci.org/ManatiCR/tecci)
 
-[![Build Status](http://104.131.51.193:8080/buildStatus/icon?job=Build/develop)](http://104.131.51.193:8080/job/Build/job/develop/)
 # tecci
 
 tecci Drupal Distribution
