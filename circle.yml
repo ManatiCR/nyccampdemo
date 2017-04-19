@@ -60,7 +60,7 @@ test:
     # - mkdir -p $HOME/reports
     # - sudo chmod 777 /home/ubuntu/reports
     # Use the arguments '-f pretty -o /dev/stdout -f junit -o /home/ubuntu/reports' when Behat releases the JUnit formatter.
-    - sudo BUILD="$HOME/build" su -c "PATH=$PATH:/home/ubuntu/.composer/vendor/bin/ && drush site-set www-data@localhost$BUILD#tecci.dev && /home/ubuntu/.phpenv/shims/php ./vendor/bin/behat -p circle" www-data
+    - ./vendor/bin/behat -p circle
     # - sudo ls -la $HOME/reports
     # - sudo mv $HOME/reports/*.xml $CIRCLE_TEST_REPORTS/junit/
     # Overridden features.
