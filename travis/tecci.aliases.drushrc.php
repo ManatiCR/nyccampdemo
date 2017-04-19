@@ -6,6 +6,6 @@
 
 $aliases['tecci.dev'] = array(
   'uri' => 'tecci.dev',
-  'root' => '/home/travis/build/manaticr/tecci/build',
+  'root' => '/home/travis/build/ManatiCR/tecci/build',
 );
 
