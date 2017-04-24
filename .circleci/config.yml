@@ -1,0 +1,48 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: tbfisher/drupal-nginx:php-7.0.x
+      - image: mariadb:5.5
+        environment:
+          MYSQL_DATABASE: drupal
+          MYSQL_ROOT_PASSWORD: drupal
+    working_directory: /var/www
+    steps:
+      - restore_cache:
+        keys:
+          - npm-cache-{{ checksum "package.json" }}
+          - composer-cache-{{ checksum "composer.lock" }}
+      - run: npm install
+      - save_cache:
+         key: npm-cache-{{ checksum "package.json" }}
+         paths:
+           - node_modules
+      - run: composer install
+      - save_cache:
+         key: composer-cache-{{ checksum "composer.lock" }}
+         paths:
+           - vendor
+      - run:
+          name: Install and configure drush
+          command: |
+            composer global require drush/drush:8.* --no-interaction
+            mkdir -p ~/.drush
+            cp ./circle/tecci.aliases.drushrc.php ~/.drush
+            drush cc drush
+            drush site-set @tecci.tecci.dev
+      - run:
+          name: Configure Nginx
+          command: |
+            cp ./circle/tecci /etc/nginx/sites-available/default
+      - run:
+          name: Build site.
+          command: |
+            ./node_modules/.bin/aquifer build
+            /usr/bin/env PHP_OPTIONS="-d sendmail_path=`which true`" drush si --account-pass=admin -y
+            drush cc drush
+            drush master-scope local
+            drush master-execute -y
+            drush cc all
+
+
