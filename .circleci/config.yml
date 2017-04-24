@@ -10,9 +10,9 @@ jobs:
     working_directory: /var/www
     steps:
       - restore_cache:
-        keys:
-          - npm-cache-{{ checksum "package.json" }}
-          - composer-cache-{{ checksum "composer.lock" }}
+          keys:
+            - npm-cache-{{ checksum "package.json" }}
+            - composer-cache-{{ checksum "composer.lock" }}
       - run: npm install
       - save_cache:
          key: npm-cache-{{ checksum "package.json" }}
