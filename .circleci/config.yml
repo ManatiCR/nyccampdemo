@@ -57,11 +57,19 @@ jobs:
       - run:
           name: Build site.
           command: |
+            cp ./.circleci/settings.secret.php ./settings
             ./node_modules/.bin/aquifer build
             /usr/bin/env PHP_OPTIONS="-d sendmail_path=`which true`" drush si --account-pass=admin -y
             drush cc drush
             drush master-scope local
             drush master-execute -y
             drush cc all
+
+      - run:
+          name: Coding Standards Linters
+          command: |
+            ./node_modules/.bin/gulp phplint
+            ./node_modules/.bin/gulp drupalcs
+            ./node_modules/.bin/gulp eslint
 
 
