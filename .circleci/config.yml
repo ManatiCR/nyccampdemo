@@ -50,7 +50,6 @@ jobs:
             mkdir -p ~/.drush
             cp ./.circleci/tecci.aliases.drushrc.php ~/.drush
             drush cc drush
-            drush site-set @tecci.tecci.dev
       - run:
           name: Configure Nginx
           command: |
@@ -64,6 +63,7 @@ jobs:
             ./node_modules/.bin/aquifer build
             # Aquifer workaround.
             mv .vendor vendor
+            drush site-set @tecci.tecci.dev
             /usr/bin/env PHP_OPTIONS="-d sendmail_path=`which true`" drush si --account-pass=admin -y
             drush cc drush
             drush master-scope local
