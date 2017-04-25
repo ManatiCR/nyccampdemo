@@ -77,4 +77,8 @@ jobs:
             ./node_modules/.bin/gulp drupalcs
             ./node_modules/.bin/gulp eslint
 
+      - run:
+          name: Behat Testing
+          command: |
+            ./vendor/bin/behat -p circle
 
