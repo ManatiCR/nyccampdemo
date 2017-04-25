@@ -18,7 +18,7 @@ jobs:
       - run:
           name: Install Node 4
           command: |
-            wget -q https://deb.nodesource.com/setup_4.x
+            curl "https://deb.nodesource.com/setup_4.x" -o "setup_4.x"
             chmod +x setup_4.x
             ./setup_4.x
             rm setup_4.x
