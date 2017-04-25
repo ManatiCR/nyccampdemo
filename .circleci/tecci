@@ -1,6 +1,6 @@
 server {
     listen 80;
-    root /var/www/build;
+    root /var/www/tecci/build;
     gzip_static on;
     fastcgi_read_timeout 300;
     location = /favicon.ico {

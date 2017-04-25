@@ -7,7 +7,7 @@ jobs:
         environment:
           MYSQL_DATABASE: drupal
           MYSQL_ROOT_PASSWORD: drupal
-    working_directory: /var/www
+    working_directory: /var/www/tecci
     steps:
       - run: echo 127.0.0.1 tecci.dev | tee -a /etc/hosts
       - checkout
@@ -30,13 +30,13 @@ jobs:
           command: |
             composer global require drush/drush:8.* --no-interaction
             mkdir -p ~/.drush
-            cp ./circle/tecci.aliases.drushrc.php ~/.drush
+            cp ./.circleci/tecci.aliases.drushrc.php ~/.drush
             drush cc drush
             drush site-set @tecci.tecci.dev
       - run:
           name: Configure Nginx
           command: |
-            cp ./circle/tecci /etc/nginx/sites-available/default
+            cp ./.circleci/tecci /etc/nginx/sites-available/default
       - run:
           name: Build site.
           command: |
