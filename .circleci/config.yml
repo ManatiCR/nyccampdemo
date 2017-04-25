@@ -28,6 +28,15 @@ jobs:
          key: npm-cache-{{ checksum "package.json" }}
          paths:
            - node_modules
+      - run:
+          name: Install Composer
+          command: |
+            php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" && \
+            php -r "copy('https://composer.github.io/installer.sig', 'composer-setup.sig');" && \
+            php -r "if (hash_file('SHA384', 'composer-setup.php') === trim(file_get_contents('composer-setup.sig'))) { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;" && \
+            php composer-setup.php && \
+            php -r "unlink('composer-setup.php');"
+            mv composer.phar /usr/bin/composer
       - run: composer install
       - save_cache:
          key: composer-cache-{{ checksum "composer.lock" }}
