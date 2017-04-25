@@ -6,6 +6,6 @@
 
 $aliases['tecci.dev'] = array(
   'uri' => 'tecci.dev',
-  'root' => '/home/ubuntu/tecci/build',
+  'root' => '/var/www/tecci/build',
 );
 
