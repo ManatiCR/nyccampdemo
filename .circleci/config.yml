@@ -9,7 +9,7 @@ jobs:
           MYSQL_ROOT_PASSWORD: drupal
     working_directory: /var/www/tecci
     steps:
-      - run: apt-get install unzip -y
+      - run: apt-get update -y && apt-get install unzip -y
       - run: echo 127.0.0.1 tecci.dev | tee -a /etc/hosts
       - checkout
       - restore_cache:
