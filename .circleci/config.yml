@@ -93,6 +93,7 @@ jobs:
   deploy:
     docker:
       - image: tbfisher/drupal-nginx:php-7.0.x
+    working_directory: /var/www/tecci
     steps:
       - run:
           name: Try deploy
