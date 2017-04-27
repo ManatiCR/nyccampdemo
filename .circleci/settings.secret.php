@@ -8,9 +8,9 @@
 $databases = array(
   'default' => array(
     'default' => array(
-      'database' => 'circle_test',
-      'username' => 'ubuntu',
-      'password' => '',
+      'database' => 'drupal',
+      'username' => 'root',
+      'password' => 'drupal',
       'host' => '127.0.0.1',
       'driver' => 'mysql',
     ),

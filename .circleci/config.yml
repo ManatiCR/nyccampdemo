@@ -1,0 +1,102 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: tbfisher/drupal-nginx:php-7.0.x
+      - image: mariadb:5.5
+        environment:
+          MYSQL_DATABASE: drupal
+          MYSQL_ROOT_PASSWORD: drupal
+    working_directory: /var/www/tecci
+    steps:
+      - run: apt-get update -y && apt-get install unzip -y
+      - run: echo 127.0.0.1 tecci.dev | tee -a /etc/hosts
+      - checkout
+      - restore_cache:
+          keys:
+            - npm-cache-{{ checksum "package.json" }}
+            - composer-cache-{{ checksum "composer.lock" }}
+      - run:
+          name: Install Node 4
+          command: |
+            curl "https://deb.nodesource.com/setup_4.x" -o "setup_4.x"
+            chmod +x setup_4.x
+            ./setup_4.x
+            rm setup_4.x
+            apt-get install nodejs -y
+      - run: npm install
+      - save_cache:
+         key: npm-cache-{{ checksum "package.json" }}
+         paths:
+           - node_modules
+      - run:
+          name: Install Composer
+          command: |
+            php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" && \
+            php -r "copy('https://composer.github.io/installer.sig', 'composer-setup.sig');" && \
+            php -r "if (hash_file('SHA384', 'composer-setup.php') === trim(file_get_contents('composer-setup.sig'))) { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;" && \
+            php composer-setup.php && \
+            php -r "unlink('composer-setup.php');"
+            mv composer.phar /usr/bin/composer
+      - run: composer install
+      - save_cache:
+         key: composer-cache-{{ checksum "composer.lock" }}
+         paths:
+           - vendor
+      - run:
+          name: Install and configure drush
+          command: |
+            composer global require drush/drush:8.* --no-interaction
+            mkdir -p ~/.drush
+            cp ./.circleci/tecci.aliases.drushrc.php ~/.drush
+            drush cc drush
+      - run:
+          name: Configure Nginx
+          command: |
+            cp ./.circleci/tecci /etc/nginx/sites-available/default
+      - run:
+          name: Build site.
+          command: |
+            cp ./.circleci/settings.secret.php ./settings
+            # Aquifer workaround.
+            mv vendor .vendor
+            ./node_modules/.bin/aquifer build
+            # Aquifer workaround.
+            mv .vendor vendor
+            drush site-set @tecci.tecci.dev
+            /usr/bin/env PHP_OPTIONS="-d sendmail_path=`which true`" drush si --account-pass=admin -y
+            drush cc drush
+            drush master-scope local
+            drush master-execute -y
+            drush cc all
+
+      - run:
+          name: Coding Standards Linters
+          command: |
+            ./node_modules/.bin/gulp phplint
+            ./node_modules/.bin/gulp drupalcs
+            ./node_modules/.bin/gulp eslint
+
+      - run:
+          name: Behat Testing
+          command: |
+            ./vendor/bin/behat -p circle
+      - deploy:
+          name: Conditionally run deploy job.
+          command: |
+            if [[ true ]]; then
+              curl --user ${CIRCLE_API_TOKEN}: \
+                --data build_parameters[CIRCLE_JOB]=deploy \
+                --data revision=$CIRCLE_SHA1 \
+                https://circleci.com/api/v1.1/project/github/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME/tree/$CIRCLE_BRANCH
+            fi
+  deploy:
+    docker:
+      - image: tbfisher/drupal-nginx:php-7.0.x
+    working_directory: /var/www/tecci
+    steps:
+      - run:
+          name: Try deploy
+          command: |
+            echo 'Deploying'
+
